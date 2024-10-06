@@ -1,0 +1,116 @@
+In this document, we will go over various code snippets in different programming languages.
+
+Let's begin with a simple C example.
+
+```
+//:test.c
+#include <stdio.h>
+
+int main() {
+    printf("Hello, World!\n");
+    return 0;
+}
+```
+
+Now, let's take a look at a basic example in C#.
+
+```
+//:test.cs
+using System;
+
+class Program {
+    static void Main() {
+        Console.WriteLine("Hello, World!");
+    }
+}
+```
+
+We'll now revisit C with another example demonstrating the use of functions.
+
+```
+//:test.c
+#include <stdio.h>
+
+void greet() {
+    printf("Hello from a function!\n");
+}
+
+int main() {
+    greet();
+    return 0;
+}
+```
+
+Moving on, here is a simple `HelloWorld` class in Java.
+
+```
+//:test.java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+```
+
+For JavaScript, we will now write a short snippet using the `console.log` method.
+
+```
+//:test.js
+console.log("Hello, World!");
+```
+
+Next, let's try a `Hello, World!` example in Go.
+
+```
+//:test.go
+package main
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!")
+}
+```
+
+Let's now see a Python example to print "Hello, World!" using a function.
+
+```
+//:test.py
+def greet():
+    print("Hello, World!")
+
+greet()
+```
+
+Lua also allows us to easily print a message to the console. Here's a sample.
+
+```
+--:test.lua
+print("Hello, World!")
+```
+
+Next, we have a SQL query to create a table.
+
+```
+--:test.sql
+CREATE TABLE users (
+    id INT PRIMARY KEY,
+    name VARCHAR(100)
+);
+```
+
+Now, for Ruby, we’ll use a simple method to print a message.
+
+```
+#:test.rb
+puts "Hello, World!"
+```
+
+Finally, we end with another Python snippet, this time using a loop.
+
+```
+#:test.py
+for i in range(3):
+    print(f"Hello, World! {i+1}")
+```
+
+And that's it! We've covered small snippets across multiple languages.
