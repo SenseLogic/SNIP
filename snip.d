@@ -138,13 +138,9 @@ void WriteText(
 
     try
     {
-        if ( !file_path.exists()
-             || file_path.readText() != file_text )
-        {
-            writeln( "Writing file : ", file_path );
+        writeln( "Writing file : ", file_path );
 
-            file_path.write( file_text );
-        }
+        file_path.write( file_text );
     }
     catch ( Exception exception )
     {
@@ -233,10 +229,22 @@ void ProcessFile(
         else if ( line_is_inside_code )
         {
             if ( line_index == first_line_index
-                 && ( line.startsWith( "//:" )
+                 && ( line.startsWith( "@:" )
+                      || line.startsWith( "//:" )
                       || line.startsWith( "--:" )
-                      || line.startsWith( "#:" ) ) )
+                      || line.startsWith( "#:" )
+                      || line.startsWith( "/*:" )
+                      || line.startsWith( "<!--:" ) ) )
             {
+                if ( line.startsWith( "/*:" ) )
+                {
+                    line = line.replace( "*/", "" );
+                }
+                else if ( line.startsWith( "<!--:" ) )
+                {
+                    line = line.replace( "-->", "" );
+                }
+
                 output_file_path_character_index = line.indexOf( ':' ) + 1;
                 output_file_path = output_folder_path ~ line[ output_file_path_character_index .. $ ].strip();
             }

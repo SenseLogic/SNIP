@@ -3,11 +3,32 @@ In this document, we will go over various code snippets in different programming
 Let's begin with a simple C example.
 
 ```
-//:test.c
+/*:test.c*/
 #include <stdio.h>
 
+void greet() {
+    printf("Hello from a function!\n");
+}
+
 int main() {
-    printf("Hello, World!\n");
+    greet();
+    return 0;
+}
+```
+
+Here's a simple C++ program that outputs a greeting.
+
+```
+//:test.cpp
+#include <iostream>
+using namespace std;
+
+void greet() {
+    cout << "Hello, from C++!" << endl;
+}
+
+int main() {
+    greet();
     return 0;
 }
 ```
@@ -25,20 +46,31 @@ class Program {
 }
 ```
 
-We'll now revisit C with another example demonstrating the use of functions.
+Next, let's try a `Hello, World!` example in Go.
 
 ```
-//:test.c
-#include <stdio.h>
+//:test.go
+package main
+import "fmt"
 
-void greet() {
-    printf("Hello from a function!\n");
+func main() {
+    fmt.Println("Hello, World!")
 }
+```
 
-int main() {
-    greet();
-    return 0;
-}
+Let's add an HTML example to create a basic webpage.
+
+```
+<!--:test.html-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+</body>
+</html>
 ```
 
 Moving on, here is a simple `HelloWorld` class in Java.
@@ -59,33 +91,28 @@ For JavaScript, we will now write a short snippet using the `console.log` method
 console.log("Hello, World!");
 ```
 
-Next, let's try a `Hello, World!` example in Go.
+Lua also allows us to easily print a message to the console. Here's a sample.
 
 ```
-//:test.go
-package main
-import "fmt"
-
-func main() {
-    fmt.Println("Hello, World!")
-}
+--:test.lua
+print("Hello, World!")
 ```
 
 Let's now see a Python example to print "Hello, World!" using a function.
 
 ```
-//:test.py
+#:test.py
 def greet():
     print("Hello, World!")
 
 greet()
 ```
 
-Lua also allows us to easily print a message to the console. Here's a sample.
+Now, for Ruby, we’ll use a simple method to print a message.
 
 ```
---:test.lua
-print("Hello, World!")
+#:test.rb
+puts "Hello, World!"
 ```
 
 Next, we have a SQL query to create a table.
@@ -98,19 +125,14 @@ CREATE TABLE users (
 );
 ```
 
-Now, for Ruby, we’ll use a simple method to print a message.
+Finally, here's a plain text file example.
 
 ```
-#:test.rb
-puts "Hello, World!"
-```
-
-Finally, we end with another Python snippet, this time using a loop.
-
-```
-#:test.py
-for i in range(3):
-    print(f"Hello, World! {i+1}")
+@:test.txt
+This is a plain text file.
+It can contain any text without special formatting.
+For example:
+Hello, World!
 ```
 
 And that's it! We've covered small snippets across multiple languages.
