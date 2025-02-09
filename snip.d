@@ -22,7 +22,7 @@
 
 import core.stdc.stdlib : exit;
 import std.conv : to;
-import std.file : exists, mkdirRecurse, readText, write, SpanMode;
+import std.file : dirEntries, exists, isFile, mkdirRecurse, readText, write, SpanMode;
 import std.path : absolutePath;
 import std.stdio : writeln;
 import std.string : endsWith, indexOf, lastIndexOf, replace, split, startsWith, strip, stripRight;
@@ -106,6 +106,75 @@ string GetFolderPath(
 
 // ~~
 
+string GetFileName(
+    string file_path
+    )
+{
+    long
+        slash_character_index;
+
+    slash_character_index = file_path.lastIndexOf( '/' );
+
+    if ( slash_character_index >= 0 )
+    {
+        return file_path[ slash_character_index + 1 .. $ ];
+    }
+    else
+    {
+        return file_path;
+    }
+}
+
+// ~~
+
+string GetFileLabel(
+    string file_path
+    )
+{
+    long
+        dot_character_index;
+    string
+        file_name;
+
+    file_name = GetFileName( file_path );
+    dot_character_index = file_name.lastIndexOf( '.' );
+
+    if ( dot_character_index >= 0 )
+    {
+        return file_name[ 0 .. dot_character_index ];
+    }
+    else
+    {
+        return file_name;
+    }
+}
+
+// ~~
+
+string GetFileExtension(
+    string file_path
+    )
+{
+    long
+        dot_character_index;
+    string
+        file_name;
+
+    file_name = GetFileName( file_path );
+    dot_character_index = file_name.lastIndexOf( '.' );
+
+    if ( dot_character_index >= 0 )
+    {
+        return file_name[ dot_character_index .. $ ];
+    }
+    else
+    {
+        return "";
+    }
+}
+
+// ~~
+
 void CreateFolder(
     string folder_path
     )
@@ -173,7 +242,90 @@ string ReadText(
 
 // ~~
 
-void ProcessFile(
+string GetComment(
+    string file_extension,
+    string text
+    )
+{
+    switch ( file_extension )
+    {
+        case ".cpp", ".cs", ".cxx", ".dart", ".go", ".h", ".hpp", ".hxx", ".java", ".js", ".kt", ".rs", ".scala", ".swift", "ts" :
+        {
+            return "//:" ~ text;
+        }
+
+        case ".cfg", ".pl", ".py", ".r", ".rb", ".sh", ".yml" :
+        {
+            return "#:" ~ text;
+        }
+
+        case ".lua", ".ps1", ".sql", ".tex" :
+        {
+            return "--:" ~ text;
+        }
+
+        case ".c" :
+        {
+            return "/*:" ~ text ~ "*/";
+        }
+
+        case ".html", ".php", ".svelte", ".svg", ".xml", ".xhtml" :
+        {
+            return "<!--:" ~ text ~ "-->";
+        }
+
+        default :
+        {
+            return "@:" ~ text;
+        }
+    }
+}
+
+// ~~
+
+void JoinFiles(
+    string input_folder_path,
+    string output_file_path
+    )
+{
+    string
+        input_file_extension,
+        input_file_path,
+        input_file_text,
+        output_file_text;
+
+    writeln( "Reading folder : ", input_folder_path );
+
+    output_file_text = "";
+
+    foreach ( input_folder_entry; input_folder_path.dirEntries( SpanMode.shallow ) )
+    {
+        if ( input_folder_entry.isFile )
+        {
+            input_file_path = input_folder_entry.name.GetLogicalPath();
+
+            if ( input_file_path.startsWith( input_folder_path ) )
+            {
+                input_file_text = input_file_path.ReadText();
+                input_file_path = input_file_path[ input_folder_path.length .. $ ];
+                input_file_extension = input_file_path.GetFileExtension();
+
+                output_file_text
+                    ~= "```\n"
+                       ~ input_file_extension.GetComment( input_file_path )
+                       ~ "\n"
+                       ~ input_file_text
+                       ~ "```\n\n";
+            }
+        }
+    }
+
+    output_file_path.WriteText( output_file_text );
+}
+
+// ~~
+
+void SplitFile(
     string input_file_path,
     string output_folder_path
     )
@@ -264,18 +416,29 @@ void main(
 {
     argument_array = argument_array[ 1 .. $ ];
 
-    if ( argument_array.length == 2
+    if ( argument_array.length == 3
+         && argument_array[ 0 ] == "--join"
          && argument_array[ 1 ].GetLogicalPath().endsWith( '/' ) )
     {
-        ProcessFile(
-            argument_array[ 0 ].GetLogicalPath(),
-            argument_array[ 1 ].GetLogicalPath()
+        JoinFiles(
+            argument_array[ 1 ].GetLogicalPath(),
+            argument_array[ 2 ].GetLogicalPath()
+            );
+    }
+    else if ( argument_array.length == 3
+         && argument_array[ 0 ] == "--split"
+         && argument_array[ 2 ].GetLogicalPath().endsWith( '/' ) )
+    {
+        SplitFile(
+            argument_array[ 1 ].GetLogicalPath(),
+            argument_array[ 2 ].GetLogicalPath()
             );
     }
     else
     {
         writeln( "Usage :" );
-        writeln( "    snip input_text.txt OUTPUT_FOLDER/" );
+        writeln( "    snip --join INPUT_FOLDER/ output_text.txt" );
+        writeln( "    snip --split input_text.txt OUTPUT_FOLDER/" );
 
         PrintError( "Invalid arguments : " ~ argument_array.to!string() );
     }

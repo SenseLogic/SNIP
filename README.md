@@ -2,7 +2,7 @@
 
 # Snip
 
-Code snippet extractor.
+Code snippet joiner and splitter.
 
 ## Installation
 
@@ -17,20 +17,22 @@ dmd -m64 snip.d
 ## Command line
 
 ```
-snip <input file path> <output folder path>
+snip --join <input folder path> <output file path>
+snip --split <input file path> <output folder path>
 ```
 
 ### Example
 
 ```bash
-snip input_text.txt OUTPUT_FOLDER/
+snip --join INPUT_FOLDER/ output_text.txt
+snip --split input_text.txt OUTPUT_FOLDER/
 ```
 
 Extracts the code snippet files.
 
 ## Version
 
-0.1
+0.2
 
 ## Author
 

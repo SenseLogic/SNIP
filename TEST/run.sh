@@ -1,3 +1,4 @@
 #!/bin/sh
 set -x
-../snip text.txt OUT/
+../snip --split text.txt OUT/
+../snip --join OUT/ joined.txt

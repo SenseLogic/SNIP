@@ -1,0 +1,111 @@
+```
+/*:test.c*/
+#include <stdio.h>
+
+void greet() {
+    printf("Hello from a function!\n");
+}
+
+int main() {
+    greet();
+    return 0;
+}
+```
+
+```
+//:test.cpp
+#include <iostream>
+using namespace std;
+
+void greet() {
+    cout << "Hello, from C++!" << endl;
+}
+
+int main() {
+    greet();
+    return 0;
+}
+```
+
+```
+//:test.cs
+using System;
+
+class Program {
+    static void Main() {
+        Console.WriteLine("Hello, World!");
+    }
+}
+```
+
+```
+//:test.go
+package main
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!")
+}
+```
+
+```
+<!--:test.html-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+</body>
+</html>
+```
+
+```
+//:test.java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+```
+
+```
+//:test.js
+console.log("Hello, World!");
+```
+
+```
+--:test.lua
+print("Hello, World!")
+```
+
+```
+#:test.py
+def greet():
+    print("Hello, World!")
+
+greet()
+```
+
+```
+#:test.rb
+puts "Hello, World!"
+```
+
+```
+--:test.sql
+CREATE TABLE users (
+    id INT PRIMARY KEY,
+    name VARCHAR(100)
+);
+```
+
+```
+@:test.txt
+This is a plain text file.
+It can contain any text without special formatting.
+For example:
+Hello, World!
+```
+
