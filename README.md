@@ -24,11 +24,16 @@ snip --split <input file path> <output folder path>
 ### Example
 
 ```bash
-snip --join INPUT_FOLDER/ output_text.txt
 snip --split input_text.txt OUTPUT_FOLDER/
 ```
 
 Extracts the code snippet files.
+
+```bash
+snip --join INPUT_FOLDER/ output_text.txt
+```
+
+Generates the code snippet files.
 
 ## Version
 
