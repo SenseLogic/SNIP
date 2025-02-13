@@ -249,34 +249,34 @@ string GetComment(
 {
     switch ( file_extension )
     {
-        case ".cpp", ".cs", ".cxx", ".dart", ".go", ".h", ".hpp", ".hxx", ".java", ".js", ".kt", ".rs", ".scala", ".swift", "ts" :
+        case ".cpp", ".cs", ".cxx", ".dart", ".go", ".h", ".hpp", ".hxx", ".java", ".js", ".kt", ".rs", ".scala", ".scss", ".styl", ".swift", "ts" :
         {
-            return "//:" ~ text;
+            return "//: " ~ text;
         }
 
         case ".cfg", ".pl", ".py", ".r", ".rb", ".sh", ".yml" :
         {
-            return "#:" ~ text;
+            return "#: " ~ text;
         }
 
         case ".lua", ".ps1", ".sql", ".tex" :
         {
-            return "--:" ~ text;
+            return "--: " ~ text;
         }
 
-        case ".c" :
+        case ".c", ".css" :
         {
-            return "/*:" ~ text ~ "*/";
+            return "/*: " ~ text ~ " */";
         }
 
         case ".html", ".php", ".svelte", ".svg", ".xml", ".xhtml" :
         {
-            return "<!--:" ~ text ~ "-->";
+            return "<!--: " ~ text ~ " -->";
         }
 
         default :
         {
-            return "@:" ~ text;
+            return "@: " ~ text;
         }
     }
 }
