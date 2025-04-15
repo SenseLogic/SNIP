@@ -426,8 +426,8 @@ void main(
             );
     }
     else if ( argument_array.length == 3
-         && argument_array[ 0 ] == "--split"
-         && argument_array[ 2 ].GetLogicalPath().endsWith( '/' ) )
+              && argument_array[ 0 ] == "--split"
+              && argument_array[ 2 ].GetLogicalPath().endsWith( '/' ) )
     {
         SplitFile(
             argument_array[ 1 ].GetLogicalPath(),
